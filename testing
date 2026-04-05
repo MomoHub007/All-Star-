@@ -507,9 +507,15 @@ local function StartLobbyMaster()
     end
 
     local function HasTargetUnitInInventory()
+        -- 🎯 ใส่ชื่อยูนิตเป้าหมายที่ต้องการสุ่มหาให้ตรงกับตอนจัดทีม
         local targetNames = {
-            " ",
-            " ",
+            "Android17", 
+            "KidLuffy", 
+            "Ikki (HalfMask)", 
+            "Jotaro Kujo", 
+            "Bakugo (Blazing)", 
+            "Toichiro", 
+            "Blackbeard"
         }
 
         Tutorial.ForceLoadInventoryUI()
@@ -533,7 +539,8 @@ local function StartLobbyMaster()
                 local normalizedUnit = NormalizeName(unitName)
                 for _, target in ipairs(targetNames) do
                     local normalizedTarget = NormalizeName(target)
-                    if normalizedUnit == normalizedTarget or normalizedUnit:find(normalizedTarget) then
+                    -- เช็คว่าไม่เป็นช่องว่าง และชื่อตรงกัน
+                    if normalizedTarget ~= "" and (normalizedUnit == normalizedTarget or normalizedUnit:find(normalizedTarget)) then
                         print("✅ [SummonCheck] พบยูนิตเป้าหมายแล้ว:", unitName)
                         return true
                     end
